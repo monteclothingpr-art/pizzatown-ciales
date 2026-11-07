@@ -142,12 +142,131 @@
 
   <header>
     <div class="logo-container">
-      <!-- Logo Navideño SVG Exacto con Rayo, Gorro y Luces -->
       <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
         <circle cx="150" cy="160" r="110" fill="none" stroke="#ffffff" stroke-width="8"/>
-        <!-- Luces Navideñas Alrededor -->
         <circle cx="70" cy="210" r="6" fill="#ffb300"/><circle cx="95" cy="245" r="6" fill="#d32f2f"/>
         <circle cx="150" cy="265" r="6" fill="#ffb300"/><circle cx="205" cy="245" r="6" fill="#2e7d32"/>
         <circle cx="230" cy="210" r="6" fill="#ffb300"/><circle cx="250" cy="160" r="6" fill="#d32f2f"/>
-        <!-- Cort
-  
+        <g stroke="#ffffff" stroke-width="6" fill="none">
+          <circle cx="220" cy="100" r="22"/>
+          <path d="M 205 85 L 185 65"/>
+        </g>
+        <polygon points="150,75 110,135 190,135" fill="#ffb300"/>
+        <circle cx="135" cy="115" r="6" fill="#d32f2f"/>
+        <circle cx="165" cy="120" r="6" fill="#d32f2f"/>
+        <circle cx="150" cy="100" r="5" fill="#d32f2f"/>
+        <path d="M 105,75 Q 150,20 180,60 Q 200,80 215,85" fill="#d32f2f"/>
+        <ellipse cx="145" cy="72" rx="45" ry="10" fill="#ffffff"/>
+        <circle cx="215" cy="85" r="12" fill="#ffffff"/>
+        <path d="M 80 145 L 210 145 L 130 195 L 220 195" fill="none" stroke="#ffffff" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="150" y="225" font-family="sans-serif" font-weight="bold" font-size="22" fill="#ffffff" text-anchor="middle">Town</text>
+      </svg>
+    </div>
+    <h1>PIZZA TOWN</h1>
+    <p class="subtitle">¡El mejor sabor al frente de la Plaza Pública de Ciales!</p>
+    <div class="info-bar">
+      <span class="badge">Abierto los 7 días</span>
+      <span class="badge">Delivery Disponible</span>
+      <span class="badge">787-621-9399 / 787-922-0434</span>
+    </div>
+  </header>
+
+  <div class="container">
+    
+    <h2 class="section-title">1. Elige tu Tamaño</h2>
+    <div class="grid-sizes">
+      <div class="card" onclick="selectSize('Pedazo', 2.50)"><h3>Pedazo</h3><p class="price">$2.50</p></div>
+      <div class="card" onclick="selectSize('Personal', 4.00)"><h3>Personal</h3><p class="price">$4.00</p></div>
+      <div class="card" onclick="selectSize('Mediana', 13.00)"><h3>Mediana</h3><p class="price">$13.00</p></div>
+      <div class="card" onclick="selectSize('Grande', 19.00)"><h3>Grande</h3><p class="price">$19.00</p></div>
+      <div class="card" onclick="selectSize('Calzone', 19.00)"><h3>Calzone</h3><p class="price">$19.00</p></div>
+      <div class="card" onclick="selectSize('Coliflor Mediana', 16.00)"><h3>Coliflor Med.</h3><p class="price">$16.00</p></div>
+    </div>
+
+    <h2 class="section-title">2. Selecciona tus Ingredientes</h2>
+    <div class="ingredients-grid">
+      <div class="ing-btn" onclick="toggleIng(this, 'Queso')">Queso</div>
+      <div class="ing-btn" onclick="toggleIng(this, 'Pepperoni')">Pepperoni</div>
+      <div class="ing-btn" onclick="toggleIng(this, 'Carne Molida')">Carne Molida</div>
+      <div class="ing-btn" onclick="toggleIng(this, 'Jamón')">Jamón</div>
+      <div class="ing-btn" onclick="toggleIng(this, 'Pollo')">Pollo</div>
+      <div class="ing-btn" onclick="toggleIng(this, 'Bacon')">Bacon</div>
+      <div class="ing-btn" onclick="toggleIng(this, 'Chorizo')">Chorizo</div>
+      <div class="ing-btn" onclick="toggleIng(this, 'Salchicha')">Salchicha</div>
+      <div class="ing-btn" onclick="toggleIng(this, 'Camarones')">Camarones</div>
+      <div class="ing-btn" onclick="toggleIng(this, 'Cebolla')">Cebolla</div>
+      <div class="ing-btn" onclick="toggleIng(this, 'Pimiento')">Pimiento</div>
+      <div class="ing-btn" onclick="toggleIng(this, 'Zetas')">Zetas</div>
+      <div class="ing-btn" onclick="toggleIng(this, 'Aceitunas')">Aceitunas</div>
+      <div class="ing-btn" onclick="toggleIng(this, 'Piña')">Piña</div>
+      <div class="ing-btn" onclick="toggleIng(this, 'Miel')">Miel</div>
+      <div class="ing-btn" onclick="toggleIng(this, 'BBQ')">BBQ</div>
+    </div>
+
+    <div class="order-summary-box">
+      <h2>Resumen de tu Orden</h2>
+      <p id="summary-text">Selecciona un tamaño para comenzar tu pedido.</p>
+      <p style="margin-top: 10px; font-size: 1.3rem; font-weight: bold; color: var(--accent-gold);" id="total-price">Total estimado: $0.00</p>
+      <button class="btn-whatsapp" onclick="sendOrder()">Pedir por WhatsApp 📱</button>
+    </div>
+
+    <h2 class="section-title">Ubicación</h2>
+    <p>Estamos ubicados en Ciales, PR, justo al frente de la plaza pública.</p>
+    <a href="https://maps.app.goo.gl/NN6o2KizamLkVf1X9?g_st=ic" target="_blank" class="location-btn">📍 Ver en Google Maps</a>
+
+  </div>
+
+  <script>
+    let currentSize = '';
+    let currentPrice = 0;
+    let selectedIngs = [];
+
+    function selectSize(name, price) {
+      currentSize = name;
+      currentPrice = price;
+      updateSummary();
+    }
+
+    function toggleIng(element, ing) {
+      element.classList.toggle('selected');
+      if (selectedIngs.includes(ing)) {
+        selectedIngs = selectedIngs.filter(i => i !== ing);
+      } else {
+        selectedIngs.push(ing);
+      }
+      updateSummary();
+    }
+
+    function updateSummary() {
+      const summaryText = document.getElementById('summary-text');
+      const totalPrice = document.getElementById('total-price');
+
+      if (!currentSize) {
+        summaryText.innerText = "Selecciona un tamaño para comenzar tu pedido.";
+        totalPrice.innerText = "Total estimado: $0.00";
+        return;
+      }
+
+      let text = Tamaño: ${currentSize};
+      if (selectedIngs.length > 0) {
+        text += \nIngredientes: ${selectedIngs.join(', ')};
+      } else {
+        text += \nIngredientes: (Ninguno seleccionado);
+      }
+
+      summaryText.innerText = text;
+      totalPrice.innerText = Total estimado: $${currentPrice.toFixed(2)};
+    }
+
+    function sendOrder() {
+      if (!currentSize) {
+        alert('Por favor selecciona el tamaño de tu pizza.');
+        return;
+      }
+      const msg = Hola Pizza Town, me gustaría ordenar:\n- Tamaño: ${currentSize}\n- Ingredientes: ${selectedIngs.join(', ') || 'Queso'}\nTotal: $${currentPrice.toFixed(2)};
+      window.open(https://wa.me/17876219399?text=${encodeURIComponent(msg)}, '_blank');
+    }
+  </script>
+</body>
+</html>
+
